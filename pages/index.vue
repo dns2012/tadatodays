@@ -94,6 +94,8 @@ import EpaperList from '~/components/partials/EpaperList.vue'
 import MainAds from '~/components/partials/MainAds.vue'
 import MainCarousel from '~/components/partials/MainCarousel.vue'
 import NewsList from '~/components/partials/NewsList.vue'
+import meta from '~/plugins/helper'
+
 export default {
   components: {
     EpaperList,
@@ -101,9 +103,15 @@ export default {
     MainAds,
     NewsList,
   },
+  mixins: [meta],
   data() {
     return {
       data: {},
+      seo: {
+        title: 'Blog | thenextbit',
+        description: 'Blog about web design, jamstack & marketing',
+        image: 'https://...',
+      },
     }
   },
   async fetch() {
@@ -117,69 +125,6 @@ export default {
     }
   },
   fetchOnServer: false,
-  head: {
-    title: 'Tadatodays.com | Berita Seputar Daerah Tapal Kuda',
-    meta: [
-      {
-        hid: 'description',
-        name: 'description',
-        content: 'Berita Seputar Daerah Tapal Kuda',
-      },
-      {
-        hid: 'keywords',
-        name: 'keywords',
-        content:
-          'Berita pasuruan, Berita probolinggo, Berita Daerah Bangil, Berita Daerah Pandaan, Berita Daerah Pasuruan, Berita Daerah Probolinggo, Berita Daerah Kraksaan, Portal Berita, Berita Teraktual, Berita Terpercaya, Tapal Kuda, Tadatodays, Berita Daerah Tapal Kuda, Berita Jember, Berita Situbondo',
-      },
-      {
-        hid: 'robots',
-        name: 'robots',
-        content: 'index, follow, noodp',
-      },
-      {
-        hid: 'alt_image',
-        name: 'alt_image',
-        content:
-          'https://tadatodays.com/public/assets/mobile/img/tada-square-ungu-new.jpg',
-      },
-      {
-        hid: 'title_image',
-        name: 'title_image',
-        content: 'Berita Seputar Daerah Tapal Kuda',
-      },
-      {
-        hid: 'og:url',
-        property: 'og:url',
-        content: '/',
-      },
-      {
-        hid: 'og:title',
-        property: 'og:title',
-        content: 'Berita Seputar Daerah Tapal Kuda',
-      },
-      {
-        hid: 'og:description',
-        property: 'og:description',
-        content: 'Berita Seputar Daerah Tapal Kuda',
-      },
-      {
-        hid: 'og:image',
-        property: 'og:image',
-        content:
-          'https://tadatodays.com/public/assets/mobile/img/tada-square-ungu-new.jpg',
-      },
-      {
-        hid: 'og:site_name',
-        property: 'og:site_name',
-        content: 'Tadatodays',
-      },
-      {
-        hid: 'og:type',
-        property: 'og:type',
-        content: 'website',
-      },
-    ],
-  },
   computed: {
     ...mapGetters({
       resources: 'getMainResources',

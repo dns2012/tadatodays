@@ -115,7 +115,7 @@ export default {
     }
   },
   async fetch() {
-    const endpoint = process.env.apiURL + 'detail/' + this.$route.params.id
+    const endpoint = process.env.apiURL + 'detail/' + this.$route.params.slug
     this.data = await fetch(endpoint).then((res) => res.json())
     this.breadcrumb = [
       {

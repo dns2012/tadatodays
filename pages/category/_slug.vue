@@ -55,7 +55,7 @@ export default {
   async fetch() {
     this.endpoint = this.endpoint
       ? this.endpoint
-      : process.env.apiURL + 'category/' + this.$route.params.id
+      : process.env.apiURL + 'category/' + this.$route.params.slug
     this.data = await fetch(this.endpoint).then((res) => res.json())
     this.breadcrumb = [
       {
