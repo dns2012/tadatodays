@@ -1,0 +1,9 @@
+.btn {
+  border-radius: 20px;
+  padding: 6px 32px;
+
+  &-primary {
+    background: #511c74 !important;
+    border: unset;
+  }
+}
