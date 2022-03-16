@@ -164,6 +164,11 @@ export default {
           name: 'image',
           content: this.$options.filters.post_image_detail(this.post.article),
         },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: this.$options.filters.post_image_detail(this.post.article),
+        },
       ],
     }
   },
