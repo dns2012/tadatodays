@@ -1,7 +1,5 @@
 <template>
-  <p v-if="$fetchState.pending" class="ml-3">Loading Content...</p>
-  <p v-else-if="$fetchState.error" class="ml-3">An error occurred :(</p>
-  <div v-else>
+  <div>
     <section class="news-details">
       <div class="container">
         <div class="row">
@@ -61,7 +59,6 @@
                 :key="index"
               >
                 <div v-if="index == adsParagraph">
-                  <div v-html="item"></div>
                   <MainAds class="mb-3" />
                 </div>
                 <div v-html="item"></div>
@@ -85,7 +82,6 @@
             <hr />
 
             <p>Share to</p>
-            {{ post }}
             <AddThis :public-id="`ra-5b74cf95529da98f`" />
             <hr class="mb-0" />
 
@@ -108,6 +104,7 @@
 
 <script>
 import AddThis from 'vue-simple-addthis-share'
+import { parse } from 'node-html-parser'
 import NewsList from '~/components/partials/NewsList.vue'
 import Breadcrumb from '~/components/partials/Breadcrumb.vue'
 import MainAds from '~/components/partials/MainAds.vue'
@@ -116,37 +113,26 @@ export default {
   components: { NewsList, Breadcrumb, AddThis, MainAds },
   layout: 'detail',
   async asyncData({ params, $http }) {
-    const endpoint = process.env.apiURL + 'detail/' + params.slug
-    const post = await fetch(endpoint).then((res) => res.json())
-    return { post }
+    const endpoint = `${process.env.apiURL}detail/${params.slug}`
+    const data = await fetch(endpoint).then((res) => res.json())
+    return { data }
   },
   data() {
     return {
-      data: {},
       breadcrumb: [],
       adsParagraph: 3,
     }
   },
-  async fetch() {
-    const endpoint = process.env.apiURL + 'detail/' + this.$route.params.slug
-    this.data = await fetch(endpoint).then((res) => res.json())
-    this.breadcrumb = [
-      {
-        title: this.data.article.categoryname,
-        url: `/category/${this.data.article.urlcategory}`,
-      },
-    ]
-  },
   head() {
     return {
-      title: `Tadatodays.com | ${this.post.article.title}`,
+      title: `Tadatodays.com | ${this.data.article.title}`,
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: `${this.post.article.postsdescription
+          content: `${this.data.article.postsdescription
             .replace(/(<([^>]+)>)/gi, '')
-            .substr(0, 200)}...`,
+            .substr(0, 160)}...`,
         },
         {
           hid: 'keywords',
@@ -162,12 +148,12 @@ export default {
         {
           hid: 'image',
           name: 'image',
-          content: this.$options.filters.post_image_detail(this.post.article),
+          content: this.$options.filters.post_image_detail(this.data.article),
         },
         {
           hid: 'og:image',
           property: 'og:image',
-          content: this.$options.filters.post_image_detail(this.post.article),
+          content: this.$options.filters.post_image_detail(this.data.article),
         },
       ],
     }
@@ -175,8 +161,13 @@ export default {
   fetchOnServer: false,
   methods: {
     getDescription(data) {
-      const doc = new DOMParser().parseFromString(data, 'text/html')
-      const HTMLArray = [...doc.body.children].map((el) => el.outerHTML)
+      const root = parse(data)
+      const HTMLArray = []
+      for (const i in root.childNodes) {
+        if (root.childNodes[i].outerHTML) {
+          HTMLArray.push(root.childNodes[i].outerHTML)
+        }
+      }
       this.adsParagraph = Math.ceil(HTMLArray.length / 2)
       return HTMLArray
     },
