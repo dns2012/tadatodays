@@ -160,8 +160,8 @@ export default {
           content: 'index, follow, noodp',
         },
         {
-          hid: 'alt_image',
-          name: 'alt_image',
+          hid: 'image',
+          name: 'image',
           content: this.$options.filters.post_image_detail(this.post.article),
         },
       ],
