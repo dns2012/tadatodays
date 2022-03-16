@@ -6,4 +6,16 @@
     background: #511c74 !important;
     border: unset;
   }
+
+  &-outline {
+    &-primary {
+      border-color: #511c74 !important;
+      color: #511c74 !important;
+
+      &:hover {
+        color: #fff !important;
+        background-color: #511c74 !important;
+      }
+    }
+  }
 }

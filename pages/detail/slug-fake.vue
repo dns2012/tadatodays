@@ -137,35 +137,68 @@ export default {
       },
     ]
   },
-  head() {
-    return {
-      title: `Tadatodays.com | ${this.post.article.title}`,
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: `${this.post.article.postsdescription
-            .replace(/(<([^>]+)>)/gi, '')
-            .substr(0, 200)}...`,
-        },
-        {
-          hid: 'keywords',
-          name: 'keywords',
-          content:
-            'Berita pasuruan, Berita probolinggo, Berita Daerah Bangil, Berita Daerah Pandaan, Berita Daerah Pasuruan, Berita Daerah Probolinggo, Berita Daerah Kraksaan, Portal Berita, Berita Teraktual, Berita Terpercaya, Tapal Kuda, Tadatodays, Berita Daerah Tapal Kuda, Berita Jember, Berita Situbondo',
-        },
-        {
-          hid: 'robots',
-          name: 'robots',
-          content: 'index, follow, noodp',
-        },
-        {
-          hid: 'alt_image',
-          name: 'alt_image',
-          content: this.$options.filters.post_image_detail(this.post.article),
-        },
-      ],
-    }
+  head: {
+    title: 'Tadatodays.com | Berita Seputar Daerah Tapal Kuda',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Berita Seputar Daerah Tapal Kuda',
+      },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        content:
+          'Berita pasuruan, Berita probolinggo, Berita Daerah Bangil, Berita Daerah Pandaan, Berita Daerah Pasuruan, Berita Daerah Probolinggo, Berita Daerah Kraksaan, Portal Berita, Berita Teraktual, Berita Terpercaya, Tapal Kuda, Tadatodays, Berita Daerah Tapal Kuda, Berita Jember, Berita Situbondo',
+      },
+      {
+        hid: 'robots',
+        name: 'robots',
+        content: 'index, follow, noodp',
+      },
+      {
+        hid: 'alt_image',
+        name: 'alt_image',
+        content:
+          'https://tadatodays.com/public/assets/mobile/img/tada-square-ungu-new.jpg',
+      },
+      {
+        hid: 'title_image',
+        name: 'title_image',
+        content: 'Berita Seputar Daerah Tapal Kuda',
+      },
+      {
+        hid: 'og:url',
+        property: 'og:url',
+        content: '/',
+      },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: 'Berita Seputar Daerah Tapal Kuda',
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content: 'Berita Seputar Daerah Tapal Kuda',
+      },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content:
+          'https://tadatodays.com/public/assets/mobile/img/tada-square-ungu-new.jpg',
+      },
+      {
+        hid: 'og:site_name',
+        property: 'og:site_name',
+        content: 'Tadatodays',
+      },
+      {
+        hid: 'og:type',
+        property: 'og:type',
+        content: 'website',
+      },
+    ],
   },
   fetchOnServer: false,
   methods: {

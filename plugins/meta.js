@@ -1,33 +1,33 @@
 export default {
   head() {
     const head = {
-      title: this.seo.title,
+      title: this.meta.title,
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: this.seo.description,
+          content: this.meta.description,
         },
         // OGP
         {
           hid: 'og:title',
           property: 'og:title',
-          content: this.seo.title,
+          content: this.meta.title,
         },
         {
           hid: 'og:description',
           property: 'og:description',
-          content: this.seo.description,
+          content: this.meta.description,
         },
         {
           hid: 'og:type',
           property: 'og:type',
-          content: this.seo.type || 'website',
+          content: this.meta.type || 'website',
         },
         {
           hid: 'og:image',
           property: 'og:image',
-          content: this.seo.image,
+          content: this.meta.image,
         },
         {
           hid: 'og:locale',

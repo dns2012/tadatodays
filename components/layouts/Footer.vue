@@ -2,7 +2,7 @@
   <section class="footer">
     <div class="footer-area">
       <div class="container">
-        <div class="row">
+        <div class="row justify-content-center">
           <div class="col-2">
             <NuxtLink
               to="/"
@@ -12,7 +12,7 @@
               <p>Beranda</p>
             </NuxtLink>
           </div>
-          <div class="col-2 pr-0">
+          <div class="col-3">
             <NuxtLink
               to="/category"
               :class="{
@@ -25,7 +25,13 @@
               <p>Kategori</p>
             </NuxtLink>
           </div>
-          <div class="col-4 col-4 px-4 d-flex justify-content-center">
+          <div class="col-2">
+            <a href="#">
+              <i class="fas fa-poll"></i>
+              <p>Polling</p>
+            </a>
+          </div>
+          <!-- <div class="col-4 col-4 px-4 d-flex justify-content-center">
             <div class="center-nav-menu">
               <NuxtLink
                 to="/category/e-paper"
@@ -39,11 +45,11 @@
                 <p>E-Paper</p>
               </NuxtLink>
             </div>
-          </div>
-          <div class="col-2 pl-0">
+          </div> -->
+          <div class="col-3">
             <a href="#">
-              <i class="fas fa-video"></i>
-              <p>Video</p>
+              <i class="fas fa-file-alt"></i>
+              <p>E-paper</p>
             </a>
           </div>
           <div class="col-2">

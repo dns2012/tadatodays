@@ -2,7 +2,40 @@
   <p v-if="$fetchState.pending" class="ml-3">Loading Content...</p>
   <p v-else-if="$fetchState.error" class="ml-3">An error occurred :(</p>
   <div v-else>
-    <section class="banner">
+    <section>
+      <div class="col-12">
+        <div class="video">
+          <div class="video__content-image">
+            <img
+              src="https://cdn.tadatodays.com/posts/2022/03/13/20220313115148.jpg"
+              loading="lazy"
+              alt="Optimizing Google Ads to Boost Revenue"
+              width="363"
+              height="auto"
+            />
+            <div class="video__content-image-overlay"></div>
+          </div>
+          <div class="news-description mt-2">
+            <h5>
+              <a href="javascript:void(0)" class="">
+                Imbas Bentrokan Dua Perguruan Silat, Bupati Banyuwangi Imbau
+                Masyarakat Tenang
+              </a>
+            </h5>
+            <div class="news-info">
+              <a href="javascript:void(0)" class=""><span> Tada TV </span></a>
+              <span> • </span> <span> 2 hours ago </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="iklan mt-4">
+      <MainAds />
+    </section>
+
+    <section class="banner mt-4">
       <div class="container">
         <div class="row">
           <div class="col-12">
@@ -24,81 +57,66 @@
       />
     </section>
 
-    <section class="e-paper">
-      <EpaperList
+    <section class="iklan mt-2">
+      <MainAds />
+    </section>
+
+    <section class="news-list">
+      <NewsList
         :title="`Koran Online`"
         :data="data.epaper"
         :link="`category/e-paper`"
       />
     </section>
 
-    <section class="news-list">
-      <NewsList
-        :title="`Berita Terpopuler`"
-        :data="data.popular"
-        :link="`/news/popular`"
-      />
+    <section class="iklan mt-2">
+      <MainAds />
     </section>
 
-    <section class="pariwisata">
+    <section class="news-list">
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <div class="epaper-categories-title">
-              <h4>Pariwisata</h4>
-              <a href="#">
-                <b>
-                  <span> Lihat semua </span>
-                </b>
-              </a>
+            <div class="news-categories-title">
+              <h4>Tada Polling</h4>
+              <a href="/news/popular" class=""
+                ><b><span> Lihat semua </span></b></a
+              >
+            </div>
+            <div v-for="i in 5" :key="i" class="news mb-4">
+              <div class="container">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="news-description">
+                      <h5>
+                        <a href="javascript:void(0)" class="">
+                          Apakah Anda setuju dengan periode jabatan 3 kali ?
+                        </a>
+                      </h5>
+                      <div class="news-info">
+                        <span> 24 minutes ago </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-12">
-            <MainCarousel />
-          </div>
-        </div>
       </div>
-    </section>
-
-    <section class="iklan mt-4">
-      <MainAds />
-    </section>
-
-    <section class="news-list">
-      <NewsList
-        :title="`Probolinggo`"
-        :data="data.probolinggo"
-        :link="`category/probolinggo`"
-      />
-    </section>
-
-    <section class="iklan">
-      <MainAds />
-    </section>
-
-    <section class="news-list">
-      <NewsList
-        :title="`Pasuruan`"
-        :data="data.pasuruan"
-        :link="`category/pasuruan`"
-      />
     </section>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import EpaperList from '~/components/partials/EpaperList.vue'
 import MainAds from '~/components/partials/MainAds.vue'
 import MainCarousel from '~/components/partials/MainCarousel.vue'
 import NewsList from '~/components/partials/NewsList.vue'
-import meta from '~/plugins/helper'
+import meta from '~/plugins/meta'
 
 export default {
   components: {
-    EpaperList,
     MainCarousel,
     MainAds,
     NewsList,
@@ -107,7 +125,7 @@ export default {
   data() {
     return {
       data: {},
-      seo: {
+      meta: {
         title: 'Blog | thenextbit',
         description: 'Blog about web design, jamstack & marketing',
         image: 'https://...',
