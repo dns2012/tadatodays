@@ -52,7 +52,7 @@ export default {
     const pageInfo = this.pageInfo()
     this.endpoint = this.endpoint
       ? this.endpoint
-      : `${process.env.apiURL}news/${pageInfo.path}`
+      : `${process.env.apiURL}/news/${pageInfo.path}`
     this.data = await fetch(this.endpoint).then((res) => res.json())
     this.breadcrumb = pageInfo.breadcrumb
   },

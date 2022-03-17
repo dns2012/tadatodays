@@ -113,7 +113,7 @@ export default {
   components: { NewsList, Breadcrumb, AddThis, MainAds },
   layout: 'detail',
   async asyncData({ params, $http }) {
-    const endpoint = `${process.env.apiURL}detail/${params.slug}`
+    const endpoint = `${process.env.apiURL}/detail/${params.slug}`
     const data = await fetch(endpoint).then((res) => res.json())
     return { data }
   },
@@ -124,39 +124,12 @@ export default {
     }
   },
   head() {
-    return {
-      title: `Tadatodays.com | ${this.data.article.title}`,
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: `${this.data.article.postsdescription
-            .replace(/(<([^>]+)>)/gi, '')
-            .substr(0, 160)}...`,
-        },
-        {
-          hid: 'keywords',
-          name: 'keywords',
-          content:
-            'Berita pasuruan, Berita probolinggo, Berita Daerah Bangil, Berita Daerah Pandaan, Berita Daerah Pasuruan, Berita Daerah Probolinggo, Berita Daerah Kraksaan, Portal Berita, Berita Teraktual, Berita Terpercaya, Tapal Kuda, Tadatodays, Berita Daerah Tapal Kuda, Berita Jember, Berita Situbondo',
-        },
-        {
-          hid: 'robots',
-          name: 'robots',
-          content: 'index, follow, noodp',
-        },
-        {
-          hid: 'image',
-          name: 'image',
-          content: this.$options.filters.post_image_detail(this.data.article),
-        },
-        {
-          hid: 'og:image',
-          property: 'og:image',
-          content: this.$options.filters.post_image_detail(this.data.article),
-        },
-      ],
-    }
+    return this.$options.filters.meta({
+      title: this.data.article.title,
+      description: this.data.article.postsdescription,
+      image: this.$options.filters.post_image_detail(this.data.article),
+      url: process.env.baseURL + this.$route.fullPath,
+    })
   },
   fetchOnServer: false,
   methods: {

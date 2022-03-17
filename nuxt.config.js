@@ -24,7 +24,7 @@ export default {
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/filter.js', '~/plugins/meta.js'],
+  plugins: ['~/plugins/filter.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -55,6 +55,7 @@ export default {
 
   // Environment Configuration: https://go.nuxtjs.dev/env
   env: {
+    baseURL: process.env.BASE_URL || 'http://localhost:3000',
     apiURL: process.env.API_URL || 'http://localhost:3000',
     cdnPostURL: process.env.CDN_POST_URL || 'http://localhost:3000',
     cdnAdminURL: process.env.CDN_ADMIN_URL || 'http://localhost:3000',

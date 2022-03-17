@@ -162,7 +162,7 @@ export default {
     if (this.resources.category) {
       this.data = this.resources
     } else {
-      this.data = await fetch(process.env.apiURL + 'resources').then((res) =>
+      this.data = await fetch(process.env.apiURL + '/resources').then((res) =>
         res.json()
       )
       this.setResources(this.data)

@@ -113,7 +113,6 @@ import { mapGetters, mapMutations } from 'vuex'
 import MainAds from '~/components/partials/MainAds.vue'
 import MainCarousel from '~/components/partials/MainCarousel.vue'
 import NewsList from '~/components/partials/NewsList.vue'
-import meta from '~/plugins/meta'
 
 export default {
   components: {
@@ -121,22 +120,24 @@ export default {
     MainAds,
     NewsList,
   },
-  mixins: [meta],
   data() {
     return {
       data: {},
-      meta: {
-        title: 'Blog | thenextbit',
-        description: 'Blog about web design, jamstack & marketing',
-        image: 'https://...',
-      },
     }
+  },
+  head() {
+    return this.$options.filters.meta({
+      title: 'Berita Seputar Daerah Tapal Kuda',
+      description: 'Berita Seputar Daerah Tapal Kuda',
+      image:
+        'https://tadatodays.com/public/assets/mobile/img/tada-square-ungu-new.jpg',
+    })
   },
   async fetch() {
     if (this.resources.latest) {
       this.data = this.resources
     } else {
-      this.data = await fetch(process.env.apiURL + 'resources').then((res) =>
+      this.data = await fetch(process.env.apiURL + '/resources').then((res) =>
         res.json()
       )
       this.setResources(this.data)
