@@ -3,7 +3,14 @@
     <div class="col-8">
       <div class="news-description">
         <h5>
-          <NuxtLink :to="{ path: '/detail/' + data.urltitle }">
+          <NuxtLink
+            :to="{
+              path:
+                data.urlcategory == 'tada-tv'
+                  ? '/detail/video/' + data.urltitle
+                  : '/detail/' + data.urltitle,
+            }"
+          >
             {{ data.title }}
           </NuxtLink>
         </h5>

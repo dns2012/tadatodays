@@ -1,7 +1,5 @@
 export const state = () => ({
-  mainResources: {
-    title: 'oke',
-  },
+  mainResources: {},
 })
 
 export const getters = {

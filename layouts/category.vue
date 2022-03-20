@@ -5,7 +5,7 @@
       <header id="header" class="header">
         <div class="header-container">
           <NuxtLink to="/" class="navbar-brand logo details">
-            <i class="fas fa-arrow-left"></i> <span>Categories</span>
+            <i class="fas fa-arrow-left"></i> <span>Kembali</span>
           </NuxtLink>
         </div>
       </header>

@@ -17,6 +17,10 @@ Vue.filter('post_image_detail', function (data) {
   return `${process.env.cdnPostURL}/${postDatePath}/${data.postphoto}`
 })
 
+Vue.filter('ads_image', function (data) {
+  return `${process.env.cdnAdsURL}/${data.image}`
+})
+
 Vue.filter('publish_date', function (date) {
   return moment(date).format('dddd, DD MMM YYYY HH:mm')
 })

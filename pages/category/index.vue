@@ -58,7 +58,10 @@
               v-for="item in categories"
               :key="item.slug"
               class="categories-listing"
-              :to="{ path: 'category/' + item.slug }"
+              :to="{
+                path:
+                  item.slug == 'polling' ? '/polling' : 'category/' + item.slug,
+              }"
             >
               <div class="categories-list">
                 <div class="container p-0">
@@ -142,7 +145,7 @@ export default {
         },
         {
           title: 'Journal & Argue',
-          slug: 'tada-tv',
+          slug: 'journal-&-argue',
           icon: '<i class="fas fa-journal-whills"></i>',
         },
         {
@@ -168,7 +171,14 @@ export default {
       this.setResources(this.data)
     }
   },
-  fetchOnServer: false,
+  head() {
+    return this.$options.filters.meta({
+      title: 'Kategori - Berita Seputar Daerah Tapal Kuda',
+      description: 'Berita Seputar Daerah Tapal Kuda',
+      image:
+        'https://tadatodays.com/public/assets/mobile/img/tada-square-ungu-new.jpg',
+    })
+  },
   computed: {
     ...mapGetters({
       resources: 'getMainResources',

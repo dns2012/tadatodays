@@ -59,5 +59,6 @@ export default {
     apiURL: process.env.API_URL || 'http://localhost:3000',
     cdnPostURL: process.env.CDN_POST_URL || 'http://localhost:3000',
     cdnAdminURL: process.env.CDN_ADMIN_URL || 'http://localhost:3000',
+    cdnAdsURL: process.env.CDN_ADS_URL || 'http://localhost:3000',
   },
 }

@@ -1,12 +1,17 @@
 <template>
-  <p v-if="$fetchState.pending" class="ml-3">Loading Content...</p>
-  <p v-else-if="$fetchState.error" class="ml-3">An error occurred :(</p>
-  <div v-else>
+  <div>
     <section class="news-details">
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <Breadcrumb :data="breadcrumb" />
+            <Breadcrumb
+              :data="[
+                {
+                  title: data.article.categoryname,
+                  url: `/category/${data.article.urlcategory}`,
+                },
+              ]"
+            />
             <div class="news-top-info mb-2">
               <h4 class="mb-3">
                 {{ data.article.title }}
@@ -46,7 +51,10 @@
               <iframe
                 class="w-100"
                 height="250"
-                src="https://www.youtube.com/embed/mclNsmBr-bU?autoplay=1&enablejsapi=1"
+                :src="`${data.article.video_url.replace(
+                  'watch?v=',
+                  'embed/'
+                )}?autoplay=1&enablejsapi=1`"
                 title="YouTube video player"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -54,7 +62,7 @@
               ></iframe>
             </figure>
             <p class="captions">{{ data.article.caption }}</p>
-            <div class="news-content">
+            <div v-if="data.article.postsdescription" class="news-content">
               <div
                 v-for="(item, index) in getDescription(
                   data.article.postsdescription
@@ -109,6 +117,7 @@
 
 <script>
 import AddThis from 'vue-simple-addthis-share'
+import { parse } from 'node-html-parser'
 import NewsList from '~/components/partials/NewsList.vue'
 import Breadcrumb from '~/components/partials/Breadcrumb.vue'
 import MainAds from '~/components/partials/MainAds.vue'
@@ -116,6 +125,11 @@ import MainAds from '~/components/partials/MainAds.vue'
 export default {
   components: { NewsList, Breadcrumb, AddThis, MainAds },
   layout: 'detail',
+  async asyncData({ params }) {
+    const endpoint = `${process.env.apiURL}/detail/${params.slug}`
+    const data = await fetch(endpoint).then((res) => res.json())
+    return { data }
+  },
   data() {
     return {
       data: {},
@@ -123,84 +137,25 @@ export default {
       adsParagraph: 3,
     }
   },
-  async fetch() {
-    const endpoint = process.env.apiURL + '/detail/' + this.$route.params.slug
-    this.data = await fetch(endpoint).then((res) => res.json())
-    this.breadcrumb = [
-      {
-        title: this.data.article.categoryname,
-        url: `/category/${this.data.article.urlcategory}`,
-      },
-    ]
+  head() {
+    return this.$options.filters.meta({
+      title: this.data.article.title,
+      description: this.data.article.postsdescription
+        ? this.data.article.postsdescription
+        : this.data.article.title,
+      image: this.$options.filters.post_image_detail(this.data.article),
+      url: process.env.baseURL + this.$route.fullPath,
+    })
   },
-  head: {
-    title: 'Tadatodays.com | Berita Seputar Daerah Tapal Kuda',
-    meta: [
-      {
-        hid: 'description',
-        name: 'description',
-        content: 'Berita Seputar Daerah Tapal Kuda',
-      },
-      {
-        hid: 'keywords',
-        name: 'keywords',
-        content:
-          'Berita pasuruan, Berita probolinggo, Berita Daerah Bangil, Berita Daerah Pandaan, Berita Daerah Pasuruan, Berita Daerah Probolinggo, Berita Daerah Kraksaan, Portal Berita, Berita Teraktual, Berita Terpercaya, Tapal Kuda, Tadatodays, Berita Daerah Tapal Kuda, Berita Jember, Berita Situbondo',
-      },
-      {
-        hid: 'robots',
-        name: 'robots',
-        content: 'index, follow, noodp',
-      },
-      {
-        hid: 'alt_image',
-        name: 'alt_image',
-        content:
-          'https://tadatodays.com/public/assets/mobile/img/tada-square-ungu-new.jpg',
-      },
-      {
-        hid: 'title_image',
-        name: 'title_image',
-        content: 'Berita Seputar Daerah Tapal Kuda',
-      },
-      {
-        hid: 'og:url',
-        property: 'og:url',
-        content: '/',
-      },
-      {
-        hid: 'og:title',
-        property: 'og:title',
-        content: 'Berita Seputar Daerah Tapal Kuda',
-      },
-      {
-        hid: 'og:description',
-        property: 'og:description',
-        content: 'Berita Seputar Daerah Tapal Kuda',
-      },
-      {
-        hid: 'og:image',
-        property: 'og:image',
-        content:
-          'https://tadatodays.com/public/assets/mobile/img/tada-square-ungu-new.jpg',
-      },
-      {
-        hid: 'og:site_name',
-        property: 'og:site_name',
-        content: 'Tadatodays',
-      },
-      {
-        hid: 'og:type',
-        property: 'og:type',
-        content: 'website',
-      },
-    ],
-  },
-  fetchOnServer: false,
   methods: {
     getDescription(data) {
-      const doc = new DOMParser().parseFromString(data, 'text/html')
-      const HTMLArray = [...doc.body.children].map((el) => el.outerHTML)
+      const root = parse(data)
+      const HTMLArray = []
+      for (const i in root.childNodes) {
+        if (root.childNodes[i].outerHTML) {
+          HTMLArray.push(root.childNodes[i].outerHTML)
+        }
+      }
       this.adsParagraph = Math.ceil(HTMLArray.length / 2)
       return HTMLArray
     },

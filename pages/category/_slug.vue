@@ -1,11 +1,16 @@
 <template>
-  <p v-if="$fetchState.pending" class="ml-3">Loading Content...</p>
-  <p v-else-if="$fetchState.error" class="ml-3">An error occurred :(</p>
-  <div v-else>
+  <div>
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <Breadcrumb :data="breadcrumb" />
+          <Breadcrumb
+            :data="[
+              {
+                title: data.category.name,
+                url: `/category/${data.category.urlcategory}`,
+              },
+            ]"
+          />
         </div>
       </div>
     </div>
@@ -42,34 +47,34 @@ import Breadcrumb from '~/components/partials/Breadcrumb.vue'
 
 export default {
   components: { NewsList, EpaperList, Breadcrumb },
+  async asyncData({ params }) {
+    const data = await fetch(
+      `${process.env.apiURL}/category/${params.slug}`
+    ).then((res) => res.json())
+    return { data }
+  },
   data() {
     return {
-      endpoint: '',
-      data: {},
       offset: 0,
       loading: false,
       empty: false,
       breadcrumb: [],
     }
   },
-  async fetch() {
-    this.endpoint = this.endpoint
-      ? this.endpoint
-      : process.env.apiURL + '/category/' + this.$route.params.slug
-    this.data = await fetch(this.endpoint).then((res) => res.json())
-    this.breadcrumb = [
-      {
-        title: this.data.category.name,
-        url: `/category/${this.data.category.urlcategory}`,
-      },
-    ]
+  head() {
+    return this.$options.filters.meta({
+      title: `Kategori - ${this.data.category.name}`,
+      description: `Berita Seputar ${this.data.category.name}`,
+      image:
+        'https://tadatodays.com/public/assets/mobile/img/tada-square-ungu-new.jpg',
+      url: process.env.baseURL + this.$route.fullPath,
+    })
   },
-  fetchOnServer: false,
   methods: {
     async loadMore() {
       this.loading = true
       const offset = this.offset + this.data.articles.length
-      const endpoint = `${this.endpoint}?offset=${offset}`
+      const endpoint = `${process.env.apiURL}/category/${this.$route.params.slug}?offset=${offset}`
       const data = await fetch(endpoint).then((res) => res.json())
       this.data.articles = this.data.articles.concat(data.articles)
       if (data.articles.length === 0) {

@@ -56,7 +56,14 @@ export default {
     this.data = await fetch(this.endpoint).then((res) => res.json())
     this.breadcrumb = pageInfo.breadcrumb
   },
-  fetchOnServer: false,
+  head() {
+    return this.$options.filters.meta({
+      title: 'Berita Seputar Daerah Tapal Kuda',
+      description: 'Berita Seputar Daerah Tapal Kuda',
+      image:
+        'https://tadatodays.com/public/assets/mobile/img/tada-square-ungu-new.jpg',
+    })
+  },
   methods: {
     async loadMore() {
       this.loading = true

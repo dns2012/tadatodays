@@ -4,7 +4,14 @@
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <Breadcrumb :data="breadcrumb" />
+            <Breadcrumb
+              :data="[
+                {
+                  title: data.article.categoryname,
+                  url: `/category/${data.article.urlcategory}`,
+                },
+              ]"
+            />
             <div class="news-top-info mb-2">
               <h4 class="mb-3">
                 {{ data.article.title }}
@@ -22,11 +29,9 @@
                   </div>
                   <div class="col-10 pl-3 pl-m-1">
                     <div class="news-info">
-                      <a href="#">
-                        <h5 class="mb-1">
-                          {{ data.article.administratorname }}
-                        </h5>
-                      </a>
+                      <h5 class="mb-1">
+                        {{ data.article.administratorname }}
+                      </h5>
                       <p>
                         {{
                           data.article.publish_date
@@ -46,7 +51,7 @@
                   :src="data.article | post_image_detail"
                   :alt="data.article.title"
                   loading="lazy"
-                  class="img-fluid"
+                  class="w-100"
                 />
               </a>
             </figure>
@@ -59,7 +64,11 @@
                 :key="index"
               >
                 <div v-if="index == adsParagraph">
-                  <MainAds class="mb-3" />
+                  <MainAds
+                    :data="data.ads"
+                    position="detail-middle-content"
+                    class="mt-2 mb-2"
+                  />
                 </div>
                 <div v-html="item"></div>
               </div>
@@ -79,18 +88,25 @@
                 </li>
               </ul>
             </div>
+
+            <MainAds
+              :data="data.ads"
+              position="detail-bottom-content"
+              class="mb-3"
+            />
+
             <hr />
 
             <p>Share to</p>
             <AddThis :public-id="`ra-5b74cf95529da98f`" />
+
             <hr class="mb-0" />
 
-            <div class="ads-floating">
-              <img
-                src="~/assets/img/IKLAN AGAK PANJANG2 BARU.jpg"
-                class="img-fluid mb-3"
-              />
-            </div>
+            <FloatingBottomAds
+              :data="data.ads"
+              position="detail-floating-bottom"
+              class="mb-3"
+            />
           </div>
         </div>
       </div>
@@ -108,18 +124,18 @@ import { parse } from 'node-html-parser'
 import NewsList from '~/components/partials/NewsList.vue'
 import Breadcrumb from '~/components/partials/Breadcrumb.vue'
 import MainAds from '~/components/partials/MainAds.vue'
+import FloatingBottomAds from '~/components/partials/FloatingBottomAds.vue'
 
 export default {
-  components: { NewsList, Breadcrumb, AddThis, MainAds },
+  components: { NewsList, Breadcrumb, AddThis, MainAds, FloatingBottomAds },
   layout: 'detail',
-  async asyncData({ params, $http }) {
+  async asyncData({ params }) {
     const endpoint = `${process.env.apiURL}/detail/${params.slug}`
     const data = await fetch(endpoint).then((res) => res.json())
     return { data }
   },
   data() {
     return {
-      breadcrumb: [],
       adsParagraph: 3,
     }
   },
@@ -131,7 +147,6 @@ export default {
       url: process.env.baseURL + this.$route.fullPath,
     })
   },
-  fetchOnServer: false,
   methods: {
     getDescription(data) {
       const root = parse(data)

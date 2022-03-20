@@ -26,10 +26,15 @@
             </NuxtLink>
           </div>
           <div class="col-2">
-            <a href="#">
+            <NuxtLink
+              :to="{ path: '/polling' }"
+              :class="{
+                'nav-active': $nuxt.$route.path == '/polling',
+              }"
+            >
               <i class="fas fa-poll"></i>
               <p>Polling</p>
-            </a>
+            </NuxtLink>
           </div>
           <!-- <div class="col-4 col-4 px-4 d-flex justify-content-center">
             <div class="center-nav-menu">
@@ -47,10 +52,15 @@
             </div>
           </div> -->
           <div class="col-3">
-            <a href="#">
+            <NuxtLink
+              :to="{ path: '/category/e-paper' }"
+              :class="{
+                'nav-active': $nuxt.$route.path == '/category/e-paper',
+              }"
+            >
               <i class="fas fa-file-alt"></i>
               <p>E-paper</p>
-            </a>
+            </NuxtLink>
           </div>
           <div class="col-2">
             <a href="#">
