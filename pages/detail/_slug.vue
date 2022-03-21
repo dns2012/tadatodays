@@ -13,7 +13,7 @@
               ]"
             />
             <div class="news-top-info mb-2">
-              <h4 class="mb-3">
+              <h4 v-if="data.article.urlcategory != 'e-paper'" class="mb-3">
                 {{ data.article.title }}
               </h4>
               <div class="container pl-0">
