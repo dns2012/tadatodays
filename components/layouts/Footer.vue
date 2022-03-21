@@ -63,10 +63,15 @@
             </NuxtLink>
           </div>
           <div class="col-2">
-            <a href="#">
+            <NuxtLink
+              :to="{ path: '/page' }"
+              :class="{
+                'nav-active': $nuxt.$route.path == '/page',
+              }"
+            >
               <i class="fas fa-info-circle"></i>
               <p>Info</p>
-            </a>
+            </NuxtLink>
           </div>
         </div>
       </div>
