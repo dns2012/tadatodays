@@ -19,12 +19,9 @@
     justify-content: space-between;
     margin: 0 auto;
     .logo {
-      width: 250px;
+      width: 50%;
       height: auto;
       margin-right: 20px;
-      @include device(mobile) {
-        width: 50px;
-      }
     }
     .input-search {
       position: relative;
@@ -73,22 +70,6 @@
         font-family: "Font Awesome 5 Free";
         font-weight: 900;
         content: "\f002";
-      }
-    }
-  }
-  .navbar-brand {
-    img {
-      + img {
-        display: none;
-      }
-    }
-    @include device(mobile) {
-      img {
-        display: none;
-        + img {
-          height: 32px;
-          display: block;
-        }
       }
     }
   }

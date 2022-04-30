@@ -37,7 +37,7 @@
     </section>
 
     <section class="news-list">
-      <NewsList
+      <EpaperList
         :title="`Koran Online`"
         :data="data.epaper"
         :link="`category/e-paper`"
@@ -59,6 +59,7 @@ import { mapGetters, mapMutations } from 'vuex'
 import MainAds from '~/components/partials/MainAds.vue'
 import MainCarousel from '~/components/partials/MainCarousel.vue'
 import NewsList from '~/components/partials/NewsList.vue'
+import EpaperList from '~/components/partials/EpaperList.vue'
 import TadaTvBanner from '~/components/partials/TadaTvBanner.vue'
 import TadaPolling from '~/components/partials/TadaPolling.vue'
 
@@ -67,6 +68,7 @@ export default {
     MainCarousel,
     MainAds,
     NewsList,
+    EpaperList,
     TadaTvBanner,
     TadaPolling,
   },

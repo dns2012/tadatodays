@@ -7,6 +7,8 @@
       aria-describedby="helpId"
       placeholder="Cari berita terkini"
       @keyup.enter="search()"
+      @focus="$emit('searchFocus', true)"
+      @blur="$emit('searchFocus', false)"
     />
   </div>
 </template>
