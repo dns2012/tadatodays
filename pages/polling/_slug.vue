@@ -181,12 +181,12 @@ export default {
         : 50
     },
     async vote(answer) {
+      this.data.is_participated = true
       const endpoint = `${process.env.apiURL}/polling/vote/${
         this.$route.params.slug
       }?user_id=${this.$cookies.get('tada-uid')}&answer=${answer}`
       const result = await fetch(endpoint).then((res) => res.json())
       if (result.status) {
-        this.data.is_participated = true
         this.data.polling_total = this.data.polling_total + 1
         if (answer) {
           this.data.polling_agree = this.data.polling_agree + 1

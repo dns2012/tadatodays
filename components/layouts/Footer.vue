@@ -27,13 +27,13 @@
           </div>
           <div class="col-2">
             <NuxtLink
-              :to="{ path: '/polling' }"
+              :to="{ path: '/category/tada-tv' }"
               :class="{
-                'nav-active': $nuxt.$route.path == '/polling',
+                'nav-active': $nuxt.$route.path == '/category/tada-tv',
               }"
             >
-              <i class="fas fa-poll"></i>
-              <p>Polling</p>
+              <i class="fas fa-tv"></i>
+              <p>TadaTV</p>
             </NuxtLink>
           </div>
           <!-- <div class="col-4 col-4 px-4 d-flex justify-content-center">
