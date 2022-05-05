@@ -1,0 +1,116 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 1049;
+  .footer-area {
+    width: 480px;
+    background: #131313;
+    color: #fff;
+    // border-top: 1px solid #f7f7f7;
+    // box-shadow: 0 5px 20px rgba(#232323, .2);
+    text-align: center;
+    padding: 0.75rem 0 0.5rem;
+  }
+  a {
+    font-size: 14px;
+    color: rgba(#fff, 0.35);
+    text-decoration: none;
+    @include device(mobile) {
+      font-size: 12px;
+    }
+    &:hover {
+      color: #fff;
+    }
+    &.nav-active {
+      color: #fff;
+    }
+  }
+  i {
+    font-size: 20px;
+    @include device(mobile) {
+      font-size: 20px;
+    }
+  }
+  p {
+    margin-bottom: 0;
+  }
+  .center-nav-menu {
+    background: $primary;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    position: absolute;
+    top: -100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include device(mobile) {
+      width: 75px;
+      height: 75px;
+    }
+    a {
+      color: #fff;
+    }
+  }
+}
+
+html[theme="dark"] {
+  .footer-area {
+    width: 480px;
+    background: #1b1b1b;
+    a {
+      font-size: 14px;
+      color: rgba(#fff, 0.35);
+      text-decoration: none;
+      @include device(mobile) {
+        font-size: 12px;
+      }
+      &:hover {
+        color: #fff;
+      }
+      i {
+        color: rgba(#fff, 0.35);
+      }
+      p {
+        color: rgba(#fff, 0.35);
+      }
+      &.nav-active {
+        color: #fff;
+        i {
+          color: #fff;
+        }
+        p {
+          color: #fff;
+        }
+      }
+    }
+    .center-nav-menu {
+      background: $primary;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      position: absolute;
+      top: -100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include device(mobile) {
+        width: 75px;
+        height: 75px;
+      }
+      a {
+        color: #fff;
+        i {
+          color: #fff;
+        }
+        p {
+          color: #fff;
+        }
+      }
+    }
+  }
+}

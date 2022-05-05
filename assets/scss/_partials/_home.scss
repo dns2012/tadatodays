@@ -1,0 +1,342 @@
+.toggle-area {
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
+  z-index: 1049;
+  @include device(mobile) {
+    bottom: 12%;
+  }
+}
+
+.news-item {
+  position: relative;
+  &::after {
+    content: ""; // ::before and ::after both require content
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background-image: linear-gradient(0deg, #000, rgba(0, 0, 0, 0));
+    opacity: 1;
+    border-radius: 0 0 20px 20px;
+  }
+  img {
+    border-radius: 20px;
+    min-height: 280px;
+    object-fit: cover;
+
+    @include device(mobile) {
+      min-height: 220px;
+    }
+  }
+  .news-description {
+    position: absolute;
+    bottom: 0;
+    padding: 16px;
+    color: #fff;
+    z-index: 99;
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+    span {
+      font-size: 14px;
+      a {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+#slider-highlights,
+#slider-pariwisata {
+  .owl-dots {
+    margin-top: 0;
+    .owl-dot {
+      &.active {
+        span {
+          background: $primary;
+          width: 35px;
+          margin: 5px;
+        }
+      }
+    }
+  }
+}
+
+.news-list {
+  margin-top: 1rem;
+  .news-categories-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 16px;
+    h4 {
+      margin-bottom: 0;
+    }
+    a {
+      text-decoration: underline;
+    }
+  }
+
+  .news {
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f7f7f7;
+    .col,
+    .col-8,
+    .col-12 {
+      padding: 0;
+    }
+    figure {
+      margin-bottom: 0;
+      img {
+        height: 100px;
+        object-fit: cover;
+        border-radius: 16px;
+      }
+    }
+    .news-description {
+      h5 {
+        font-size: 16px;
+        line-height: 1.5;
+        a {
+          font-weight: 600;
+          color: #232323;
+          text-decoration: none;
+        }
+      }
+      a {
+        color: $primary;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      span {
+        font-size: 14px;
+        a {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+.epaper-item {
+  position: relative;
+  margin-bottom: 1.5rem;
+  height: 275px;
+  @include device(mobile) {
+    height: 225px;
+    margin-bottom: 1rem;
+  }
+  &::after {
+    content: ""; // ::before and ::after both require content
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background-image: linear-gradient(0deg, #000, rgba(0, 0, 0, 0));
+    opacity: 1;
+    border-radius: 0 0 20px 20px;
+  }
+  img {
+    border-radius: 20px;
+    object-fit: cover;
+    height: 275px;
+    @include device(mobile) {
+      height: 225px;
+    }
+  }
+  .news-description {
+    bottom: 0;
+    color: #fff;
+    position: absolute;
+    padding: 16px;
+    width: 100%;
+    z-index: 99;
+    h5 {
+      font-size: 17px;
+      line-height: 1.35;
+      max-height: 110px;
+      overflow: auto;
+    }
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+    span {
+      font-size: 12px;
+      a {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.epaper-categories-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  margin-top: 1rem;
+  h4 {
+    margin-bottom: 0;
+  }
+  a {
+    text-decoration: underline;
+  }
+}
+
+html[theme="dark"] {
+  .news-list {
+    margin-top: 1rem;
+    .news-categories-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      h4 {
+        margin-bottom: 0;
+        color: #fff;
+      }
+      a {
+        text-decoration: underline;
+      }
+    }
+
+    .news {
+      padding-bottom: 16px;
+      border-bottom: 1px solid #363636;
+      &:last-child {
+        border: none !important;
+      }
+      .col,
+      .col-8,
+      .col-12 {
+        padding: 0;
+      }
+      figure {
+        margin-bottom: 0;
+        img {
+          height: 100px;
+          object-fit: cover;
+          border-radius: 16px;
+        }
+      }
+      .news-description {
+        h5 {
+          font-size: 16px;
+          line-height: 1.5;
+          a {
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+          }
+        }
+        a {
+          color: $primary;
+          font-weight: 700;
+          text-decoration: none;
+        }
+        span {
+          font-size: 14px;
+          color: #fff;
+          a {
+            font-size: 14px;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  .epaper-categories-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    margin-top: 1rem;
+    h4 {
+      margin-bottom: 0;
+      color: #fff;
+    }
+    a {
+      text-decoration: underline;
+    }
+  }
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+
+  &__content-image {
+    height: 230px;
+    background: #CFDBE8;
+    border-radius: 8px;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+    }
+
+    &-overlay {
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, .4);
+      transition: all 1s;
+      border-radius: 8px;
+      position: absolute;
+      top: 0%;
+      left: 0%;
+    }
+
+    &-overlay::after {
+      position: absolute;
+      content: url("https://niagaspace.sgp1.cdn.digitaloceanspaces.com/www/assets/images/2019/client-testimony/icon-play.svg");
+      width: 74px;
+      height: 74px;
+      padding-top: 20px;
+      padding-left: 30px;
+      background: #511c74;
+      border-radius: 50%;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: all 1s;
+    }
+
+    &-overlay:hover {
+      background: rgba(0, 0, 0, .2);
+      cursor: pointer;
+    }
+  }
+
+  .news-description {
+    h5 {
+      font-size: 16px;
+      line-height: 1.5;
+      a {
+        font-weight: 600;
+        color: #232323;
+        text-decoration: none;
+      }
+    }
+    a {
+      color: $primary;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    span {
+      font-size: 14px;
+      a {
+        font-size: 14px;
+      }
+    }
+  }
+}
