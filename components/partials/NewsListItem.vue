@@ -25,12 +25,21 @@
     </div>
     <div class="col">
       <figure>
-        <img
-          :src="data | post_image"
-          class="img-fluid"
-          loading="lazy"
-          :alt="data.title"
-        />
+        <NuxtLink
+          :to="{
+            path:
+              data.urlcategory == 'tada-tv'
+                ? '/detail/video/' + data.urltitle
+                : '/detail/' + data.urltitle,
+          }"
+        >
+          <img
+            :src="data | post_image"
+            class="img-fluid"
+            loading="lazy"
+            :alt="data.title"
+          />
+        </NuxtLink>
       </figure>
     </div>
   </div>
