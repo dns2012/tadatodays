@@ -14,11 +14,14 @@
         </div>
       </div>
     </div>
-    <section v-if="data.category.id != 21" class="news-list">
-      <NewsList :data="data.articles" />
-    </section>
-    <section v-else class="e-paper">
+    <section
+      v-if="data.category.id == 21 || data.category.id == 28"
+      class="e-paper"
+    >
       <EpaperList :data="data.articles" :show-all="false" />
+    </section>
+    <section v-else class="news-list">
+      <NewsList :data="data.articles" />
     </section>
     <div class="container mb-5">
       <div class="row">

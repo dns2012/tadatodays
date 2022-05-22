@@ -47,9 +47,9 @@ Vue.filter('admin_image', function (data) {
 })
 
 Vue.filter('meta', function (data) {
-  const description = `${data.description
-    .replace(/(<([^>]+)>)/gi, '')
-    .substr(0, 160)}...`
+  const description = data.description
+    ? `${data.description.replace(/(<([^>]+)>)/gi, '').substr(0, 160)}...`
+    : null
   return {
     title: `Tadatodays.com | ${data.title}`,
     meta: [

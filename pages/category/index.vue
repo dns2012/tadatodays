@@ -158,6 +158,11 @@ export default {
           slug: 'polling',
           icon: '<i class="fas fa-poll"></i>',
         },
+        {
+          title: 'Tada Komik',
+          slug: 'tada-komik',
+          icon: '<i class="fas fa-book-reader"></i>',
+        },
       ],
     }
   },

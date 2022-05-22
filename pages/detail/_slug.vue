@@ -13,7 +13,13 @@
               ]"
             />
             <div class="news-top-info mb-2">
-              <h4 v-if="data.article.urlcategory != 'e-paper'" class="mb-3">
+              <h4
+                v-if="
+                  data.article.urlcategory != 'e-paper' ||
+                  data.article.urlcategory != 'tada-komik'
+                "
+                class="mb-3"
+              >
                 {{ data.article.title }}
               </h4>
               <div class="container pl-0">
@@ -56,7 +62,10 @@
               </a>
             </figure>
             <p class="captions">{{ data.article.caption }}</p>
-            <div class="news-content">
+            <div
+              v-if="data.article.urlcategory != 'tada-komik'"
+              class="news-content"
+            >
               <div
                 v-for="(item, index) in getDescription(
                   data.article.postsdescription
@@ -73,7 +82,7 @@
                 <div v-html="item"></div>
               </div>
             </div>
-            <div class="tags">
+            <div v-if="data.article.urlcategory != 'tada-komik'" class="tags">
               <ul class="nav">
                 <li
                   v-for="(item, index) in data.tags"
